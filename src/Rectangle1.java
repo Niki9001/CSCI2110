@@ -1,3 +1,6 @@
+// Full Name: Niki Zheng
+// ID number: B00932128
+
 public class Rectangle1{
     //instance variables
     private int xpos, ypos, width, height;

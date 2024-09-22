@@ -1,104 +1,94 @@
-// Name: Niki Zheng
+import java.util.Scanner;
+// Full Name: Niki Zheng
 // ID number: B00932128
-public class Exercise2 {
-    //instance variables
-    private int xpos, ypos, width, height;
-    //constructors
-    // why do we need two Exercise2(){}
-    public Exercise2() {}
-    public Exercise2(int xpos, int ypos, int width, int height) {
-        this.xpos = xpos;
-        this.ypos = ypos;
-        this.width = width;
-        this.height = height;
-    }
 
-    //setters and getters
-    public void setX(int xpos){this.xpos=xpos;}
-    public void setY(int ypos){this.ypos=ypos;}
-    public void setWidth(int width){this.width=width;}
-    public void setHeight(int height){this.height=height;}
-    public int getX(){return xpos;}
-    public int getY(){return ypos;}
-    public int getWidth(){return width;}
-    public int getHeight(){return height;}
-    //other methods: moveTo changes xpos and ypos and resize changes
-//width and height
-    public void moveTo(int xpos, int ypos){this.xpos=xpos; this.ypos=ypos;}
-    public void resize(int width, int height){this.width=width; this.height=height;}
-    // toString method that returns the rectangle's details in the format
-//(xpos, ypos, width, height)
-    public String toString() {
-        return "(" + xpos + ", " + ypos + ", " + width + ", " + height + ")";
-    }
-    //contains method: returns true if a point (px, py) is contained within this rectangle
-//contains also returns true if the point touches the rectangle
-    public boolean contains(int px, int py)
-    {
-        return (px>=xpos && px<=xpos+width && py>=ypos && py<= ypos+height);
-    }
-    //contains method: returns true if another rectangle r is contained within this rectangle
-//returns true if the rectangle touches the boundaries
-//it uses the point contains method
-    public boolean contains(Exercise2 r)
-    {
-        return(this.contains(r.getX(),r.getY())&&
-                this.contains(r.getX() + r.getWidth(), r.getY()+r.getHeight()));
-    }
 
-    // add if touches
-    public boolean touches(int px, int py) {
-        // modify if contains to check if the point is on the upper and lower boundaries of the rectangle
-        boolean onTopOrBottom = (px >= xpos && px <= xpos + width) && (py == ypos || py == ypos + height);
+// This version is something I re-downloaded from my github, the reason I have relaoded it, that's because of my understanding of the context was wrong
+public class Exercise2{
+    public static void main(String[] args){
+        // new a scanner
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("How many time would you like to compare: ");
 
-        // Check if the point is on the left and right boundaries of the rectangle
-        boolean onLeftOrRight = (py >= ypos && py <= ypos + height) && (px == xpos || px == xpos + width);
+        // parse input to int
+        int inputNumPar = Integer.parseInt(scanner.nextLine());
 
-        // check if on boundaries
-        if (onTopOrBottom || onLeftOrRight) {
-            return true;
-        } else {
-            return false;
+        for (int i = 1; i <= inputNumPar; i = i + 1){
+            System.out.println("Test case: " + i);
+            // use array to input
+            //int[] rect1 = new int[4];
+            //int[] rect2 = new int[4];
+            int[][] rect = new int[2][4];
+            // use for loop to use those code twice
+            for (int k = 0;k < 2; k++) {
+                // use while true to allow user input, if there is a typo
+                while (true) {
+                    System.out.println("Please input for rectangle " + (k + 1) + ": ");
+                    String[] input = scanner.nextLine().split(" ");
+                    // check length
+                    if (input.length == 4) {
+                        boolean lengthValid = true;
+                        // check if input is int
+                        for (int j = 0; j < 4;j = j + 1) {
+                            if (!input[j].matches("-?\\d+")) {
+                                lengthValid = false;
+                                break;
+                            }
+                        }
+
+                        // if valid
+                        if (lengthValid == true) {
+                            for (int j = 0; j < 4; j++) {
+                                rect[k][j] = Integer.parseInt(input[j]);
+                            }
+                            break;
+                        } else {
+                            System.out.println("Please re-input valid integers.");
+                        }
+                    } else {
+                        System.out.println("Please input exactly 4 integers.");
+                    }
+                }
+            }
+            // new 2 rectangele objects
+//        Rectangle1 r1 = new Rectangle1(rect[0], rect[1], rect[2], rect[3]);
+//        Rectangle1 r2 = new Rectangle1(rect[0], rect[1], rect[2], rect[3]);
+//        Rectangle1 r1 = rectangles[0];
+//        Rectangle1 r2 = rectangles[1];
+//        System.out.println("Test case: 1");
+
+            // new 2 rectangele objects
+            Rectangle2 r1 = new Rectangle2(rect[0][0], rect[0][1], rect[0][2], rect[0][3]);
+            Rectangle2 r2 = new Rectangle2(rect[1][0], rect[1][1], rect[1][2], rect[1][3]);
+
+//            System.out.println("Rectangle 1: " + r1);
+//            System.out.println("Rectangle 2: " + r2);
+            boolean isContained = (r1.contains(r2) == true);
+            System.out.println("Is Rectangle 2 contained in Rectangle 1? " + isContained);
+
+            boolean isTouched = (r1.touches(r2) == true);
+            System.out.println("Rectangle 2 touched in Rectangle 1? " + isTouched);
+
+            boolean isOverlapped = (r1.overlaps(r2) == true);
+            System.out.println("Rectangle 2 overlapped in Rectangle 1? " + isOverlapped);
+
+            System.out.println("\n");
+
+//            System.out.println("Rectangle 1: " + r1);
+//            System.out.println("Rectangle 2: " + r2);
+//
+//            // use contains function
+//            boolean ifContain = (r1.contains(r2) == true);
+//            System.out.println("Is Rectangle 2 contained in Rectangle 1? " + ifContain);
+//        for (int i = 1; i < inputNumPar; i++) {
+//            boolean ifContain = rectangles[0].contains(rectangles[i]);
+//            System.out.println("Is Rectangle " + (i + 1) + " contained in Rectangle 1? " + ifContain);
+//        }
+//        boolean ifContain = (r1.contains(r2) == true);
+//        System.out.println("Is Rectangle 2 contained in Rectangle 1? " + ifContain);
+
         }
-    }
-    public boolean touches(Exercise2 r) {
-        // Check that the four corners of r are in contact with the boundaries of the current rectangle.
-        boolean topLeftTouches = this.touches(r.getX(), r.getY());
 
-        boolean topRightTouches = this.touches(r.getX() + r.getWidth(), r.getY());
-
-        boolean bottomLeftTouches = this.touches(r.getX(), r.getY() + r.getHeight());
-
-        boolean bottomRightTouches = this.touches(r.getX() + r.getWidth(), r.getY() + r.getHeight());
-        //determine
-        if (topLeftTouches == true) {
-            return true;
-        } else if (topRightTouches) {
-            return true;
-        } else if (bottomLeftTouches) {
-            return true;
-        } else if (bottomRightTouches) {
-            return true;
-        } else {
-            return false;
-        }
+        scanner.close();
     }
-    public boolean overlaps(int px, int py) {
-        // TODO: check if inside but do i need =?
-        return (px > xpos && px < xpos + width && py > ypos && py < ypos + height);
-    }
-    public boolean overlaps(Exercise2 r) {
-        // modify if contains to ccheck four points
-        boolean topLeftOverlaps = this.overlaps(r.getX(), r.getY());
-        boolean topRightOverlaps = this.overlaps(r.getX() + r.getWidth(), r.getY());
-        boolean bottomLeftOverlaps = this.overlaps(r.getX(), r.getY() + r.getHeight());
-        boolean bottomRightOverlaps = this.overlaps(r.getX() + r.getWidth(), r.getY() + r.getHeight());
-        //determine
-        if (topLeftOverlaps == true || topRightOverlaps == true || bottomLeftOverlaps == true ||bottomRightOverlaps == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }
