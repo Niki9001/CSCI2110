@@ -1,4 +1,6 @@
 import java.util.Scanner;
+// Full Name: Niki Zheng
+// ID number: B00932128
 
 public class Exercise1{
     public static void main(String[] args){
