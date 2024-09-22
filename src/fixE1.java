@@ -20,9 +20,8 @@ public class fixE1{
             //int[] rect2 = new int[4];
             int[][] rect = new int[2][4];
             // use for loop to use those code twice
-            for (int k = 0; k < 2; k++) {
+            for (int k = 0;k < 2; k++) {
                 // use while true to allow user input, if there is a typo
-
                 while (true) {
                     System.out.println("Please input for rectangle " + (k + 1) + ": ");
                     String[] input = scanner.nextLine().split(" ");
@@ -51,6 +50,12 @@ public class fixE1{
                     }
                 }
             }
+            // new 2 rectangele objects
+//        Rectangle1 r1 = new Rectangle1(rect[0], rect[1], rect[2], rect[3]);
+//        Rectangle1 r2 = new Rectangle1(rect[0], rect[1], rect[2], rect[3]);
+//        Rectangle1 r1 = rectangles[0];
+//        Rectangle1 r2 = rectangles[1];
+//        System.out.println("Test case: 1");
 
             // new 2 rectangele objects
             Rectangle1 r1 = new Rectangle1(rect[0][0], rect[0][1], rect[0][2], rect[0][3]);
@@ -61,6 +66,19 @@ public class fixE1{
             boolean isContained = (r1.contains(r2) == true);
             System.out.println("Is Rectangle 2 contained in Rectangle 1? " + isContained);
             System.out.println("\n");
+
+            System.out.println("Rectangle 1: " + r1);
+//            System.out.println("Rectangle 2: " + r2);
+//
+//            // use contains function
+//            boolean ifContain = (r1.contains(r2) == true);
+//            System.out.println("Is Rectangle 2 contained in Rectangle 1? " + ifContain);
+//        for (int i = 1; i < inputNumPar; i++) {
+//            boolean ifContain = rectangles[0].contains(rectangles[i]);
+//            System.out.println("Is Rectangle " + (i + 1) + " contained in Rectangle 1? " + ifContain);
+//        }
+//        boolean ifContain = (r1.contains(r2) == true);
+//        System.out.println("Is Rectangle 2 contained in Rectangle 1? " + ifContain);
 
         }
 
