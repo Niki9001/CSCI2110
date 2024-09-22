@@ -1,5 +1,9 @@
 import java.util.Scanner;
+// Full Name: Niki Zheng
+// ID number: B00932128
 
+
+// This version is something I re-downloaded from my github, the reason I have relaoded it, that's because of my understanding of the context was wrong
 public class fixE1{
     public static void main(String[] args){
         // new a scanner
